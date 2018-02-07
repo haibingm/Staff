@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        #parse("/layout/head.vm")
+    </head>
+        $screen_content
+</html>

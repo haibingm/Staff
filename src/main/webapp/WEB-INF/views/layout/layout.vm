@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    #parse("/layout/head.vm")
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        #parse("/layout/header.vm")
+        #parse("/layout/left.vm")
+        <div class="content-wrapper">
+            $screen_content
+        </div>
+    </div>
+</body>
+<html>
+

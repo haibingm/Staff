@@ -1,0 +1,72 @@
+#set($layout = "/layout/dialog.vm")
+
+<body>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title" id="myModalLabel">
+        补签信息
+    </h4>
+</div>
+<div class="modal-body">
+    <!-- form start -->
+    <form role="form" id="reAttendForm">
+        <input type="hidden" class="form-control" name="attendId" id="attendId" value="$attend.id" placeholder="补签日期" readonly/>
+        <div class="box-body">
+            <div class="form-group">
+                <label >补签日期</label>
+                <input type="text" class="form-control" name="attendDate" id="attendDate" value="$date.format('yyyy-MM-dd',$attend.attendDate)" placeholder="补签日期" readonly/>
+            </div>
+            <div class="bootstrap-timepicker">
+                <label >签到时间</label>
+                <div class="input-group">
+                        <input type="text" class="form-control timepicker" name="reAttendMor" id="reAttendMor" value="$date.format('HH:mm:ss',$attend.attendMorning)" placeholder="签到时间" />
+                    <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bootstrap-timepicker">
+                <label >签退时间</label>
+                <div class="input-group">
+                        <input type="text" class="form-control timepicker" name="reAttendEve" id="reAttendEve" value="$date.format('HH:mm:ss',$attend.attendEvening)" placeholder="签退时间"/>
+                    <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label >补签原因</label>
+                <input type="text" class="form-control" name="comments" id="comments" value="" placeholder="补签原因"/>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </form>
+</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+    </button>
+    <button type="submit" class="btn btn-primary"
+            onclick="reAttend()">
+        提交
+    </button><span id="tip"> </span>
+</div>
+
+<!-- jQuery 2.2.3 -->
+<script src="/static/jquery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/dist/js/app.min.js"></script>
+<script src="/static/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script>
+    $(function () {
+        $(".timepicker").timepicker({
+            showInputs: false,
+            showSeconds:true,
+            showMeridian:false
+        });
+    })
+</script>
+</body>

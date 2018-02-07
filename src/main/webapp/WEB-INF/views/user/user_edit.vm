@@ -1,0 +1,90 @@
+#set($layout = "/layout/dialog.vm")
+
+<body>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title" id="myModalLabel">
+        用户信息
+    </h4>
+</div>
+<div class="modal-body">
+    #if($action != "delete")
+        <!-- form start -->
+        <form role="form" id="editForm">
+            <div class="box-body">
+                <div class="form-group">
+                    <label >用户名</label>
+                    <input type="text" class="form-control" name="username" id="username" value="$user.username" placeholder="用户名" readonly/>
+                </div>
+                <div class="form-group">
+                    <label >姓名</label>
+                    #if($action == "edit")
+                        <input type="text" class="form-control" name="realName" id="realName" value="$user.realName" placeholder="姓名"/>
+                    #else
+                        <input type="text" class="form-control" name="realName" id="realName" value="$user.realName" placeholder="姓名" readonly/>
+                    #end
+                </div>
+                <div class="form-group">
+                    <label >电话</label>
+                    #if($action == "edit")
+                        <input type="tel" class="form-control" name="mobile" id="mobile" value="$user.mobile" placeholder="电话"/>
+                    #else
+                        <input type="tel" class="form-control" name="mobile" id="mobile" value="$user.mobile" placeholder="电话" readonly/>
+                    #end
+                </div>
+                <div class="form-group">
+                    <label>入职时间</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        #if($action == "edit")
+                            <input type="date" class="form-control pull-right" name="entryTime" id="datepicker" value="$date.format('yyyy-MM-dd',$user.entryTime)">
+                        #else
+                            <input type="date" class="form-control pull-right" name="entryTime"  value="$date.format('yyyy-MM-dd',$user.entryTime)" readonly>
+                        #end
+                    </div>
+                    <!-- /.input group -->
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </form>
+        #else
+        确定要删除用户吗？
+    #end
+</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+    </button>
+    #if($action != "info")
+
+        <button type="submit" class="btn btn-primary"
+                onclick=" #if($action == "edit") editUser() #else deleteUser($user.id) #end">
+            提交
+        </button><span id="tip"> </span>
+    #end
+</div>
+
+<!-- jQuery 2.2.3 -->
+<script src="/static/jquery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/dist/js/app.min.js"></script>
+<script src="/static/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/static/plugins/daterangepicker/moment.min.js"></script>
+<script src="/static/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script>
+    $(function () {
+        $('#datepicker').datepicker({
+            language: "zh-CN",
+            autoclose: true,
+            clearBtn: true,
+            todayBtn: true,
+            format: "yyyy-mm-dd"
+        });
+    })
+</script>
+</body>
